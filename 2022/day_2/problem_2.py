@@ -48,7 +48,8 @@ if __name__ == '__main__':
         game_result = result(v_e, v_m, m_game)
         points += game_result
 
-    print(points)
+
+
 
 
 
