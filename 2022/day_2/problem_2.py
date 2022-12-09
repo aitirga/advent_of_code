@@ -47,12 +47,7 @@ if __name__ == '__main__':
         v_m = strategy(v_e, intent)
         game_result = result(v_e, v_m, m_game)
         points += game_result
-
-
-
-
-
-
+    print(points)
 
 
 
