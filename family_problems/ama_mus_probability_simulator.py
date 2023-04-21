@@ -1,7 +1,18 @@
 import random
 import rich
-prob_ama_mus = 0.4
-prob_aita_mus = 0.6
+import pandas as pd
+import numpy as np
+
+def get_ama_aita_prob(filename: str):
+    data = pd.read_csv(filename)
+    ama_points = data['ama']
+    aita_points = data['aita']
+    whole_points = ama_points + aita_points
+    return np.mean(ama_points / whole_points), np.mean(aita_points / whole_points)
+
+prob_ama_mus, prob_aita_mus = get_ama_aita_prob('./mus_statistics.txt')
+
+
 import matplotlib.pyplot as plt
 def sim_mus(target_points):
     points_ama = 0
