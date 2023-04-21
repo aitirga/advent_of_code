@@ -2,6 +2,8 @@ import random
 import rich
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 def get_ama_aita_prob(filename: str):
     data = pd.read_csv(filename)
@@ -10,10 +12,7 @@ def get_ama_aita_prob(filename: str):
     whole_points = ama_points + aita_points
     return np.mean(ama_points / whole_points), np.mean(aita_points / whole_points)
 
-prob_ama_mus, prob_aita_mus = get_ama_aita_prob('./mus_statistics.txt')
 
-
-import matplotlib.pyplot as plt
 def sim_mus(target_points):
     points_ama = 0
     points_aita = 0
@@ -30,24 +29,19 @@ def sim_mus_whole(n_sim, at_least_points):
 
     while n_sim < n_max:
         points_ama, points_aita = sim_mus(target_mus)
-        # if points_ama > points_aita:
-        #     ama_wins += 1
-        # else:
-        #     aita_wins += 1
         if points_ama >= at_least_points:
             ama_wins += 1
         if points_aita >= at_least_points:
             aita_wins += 1
         n_sim += 1
-        # if n_sim % 1000 == 0:
-        #     rich.print(f"prob_ama_wins: {ama_wins/n_sim * 100} %")
-        #     rich.print(f"prob_aita_wins: {aita_wins/n_sim * 100} %")
     return ama_wins/n_sim, aita_wins/n_sim
 
 
 if __name__ == '__main__':
+    prob_ama_mus, prob_aita_mus = get_ama_aita_prob('./mus_statistics.txt')
     target_mus = 10
     n_max = 10000
+
     n_sim = 0
     ama_wins = 0
     aita_wins = 0
