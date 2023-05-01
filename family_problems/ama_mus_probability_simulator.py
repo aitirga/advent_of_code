@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def get_ama_aita_prob(filename: str):
     data = pd.read_csv(filename)
     ama_points = data['ama']
@@ -39,8 +38,9 @@ def sim_mus_whole(n_sim, at_least_points):
 
 if __name__ == '__main__':
     prob_ama_mus, prob_aita_mus = get_ama_aita_prob('./mus_statistics.txt')
-    target_mus = 10
-    n_max = 10000
+    print(f'Probabilidad ama: {prob_ama_mus * 100} %, probabilidad aita: {prob_aita_mus * 100} %')
+    target_mus = 22
+    n_max = 20000
 
     n_sim = 0
     ama_wins = 0
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     plt.plot(prob_aita, label='aita')
     plt.xlabel('Puntos en el MUS [-]')
     plt.ylabel('Probabilidad de ganar [%]')
-    plt.title(f'Probabilidad ama: {prob_ama_mus * 100} %, probabilidad aita: {prob_aita_mus * 100} %')
+    plt.title(f'Probabilidad ama: {prob_ama_mus * 100:1.2f} %, probabilidad aita: {prob_aita_mus * 100:1.2f} %')
     # Show the number in the axis of each point: 1, 2, 3, 4, 5...
     # Reescale axis 0.0 to 1.0
     plt.ylim(0, 110)
@@ -59,6 +59,10 @@ if __name__ == '__main__':
     plt.legend()
     plt.grid()
     plt.show()
+
+    print(f'Probabilidad de que ama gane con {target_mus} puntos: {sim_mus_whole(n_sim, target_mus)[0] * 100:1.2f} %')
+    print(f'Probabilidad de que aita gane con {target_mus} puntos: {sim_mus_whole(n_sim, target_mus)[1] * 100:1.2f} %')
+
 
 
 
