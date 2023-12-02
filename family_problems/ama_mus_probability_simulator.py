@@ -39,8 +39,8 @@ def sim_mus_whole(n_sim, at_least_points):
 if __name__ == '__main__':
     prob_ama_mus, prob_aita_mus = get_ama_aita_prob('./mus_statistics.txt')
     print(f'Probabilidad ama: {prob_ama_mus * 100} %, probabilidad aita: {prob_aita_mus * 100} %')
-    target_mus = 22
-    n_max = 20000
+    target_mus = 10
+    n_max = 30000
 
     n_sim = 0
     ama_wins = 0
