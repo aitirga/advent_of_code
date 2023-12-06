@@ -40,23 +40,20 @@ def is_gear(case: dict, digits: list):
         *[(line_idx - 1, i) for i in range(pos - 1, pos + 2)],
         *[(line_idx + 1, i) for i in range(pos - 1, pos + 2)],
     ]
-    print(cases_to_check)
 
     adj_digits = []
     for case in cases_to_check:
         if case[0] < 0 or case[1] < 0:
             continue
-        print(case)
         for digit_idx, digit in enumerate(cur_digits):
             if digit['line_idx'] == case[0] and digit['start'] <= case[1] <= digit['end'] - 1:
-                print(case[1])
-                print(digit['start'], digit['end'])
                 adj_digits.append(digit['value'])
                 # Delete the digit from the list in position digit_idx
                 cur_digits.pop(digit_idx)
     # adj_digits = list(set(adj_digits))
     if len(adj_digits) == 2:
         return np.prod(adj_digits)
+
 
 
 
@@ -92,11 +89,11 @@ if __name__ == '__main__':
             })
 
     total_value = 0
-    for case in detected_gears:
+    for case_idx, case in enumerate(detected_gears):
         value = is_gear(case, detected)
         if value is not None:
             total_value += value
-    print(total_value)
+        #
 
 
 
